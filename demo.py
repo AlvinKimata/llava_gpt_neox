@@ -8,7 +8,7 @@ from scipy.signal import resample
 from transformers import LlamaForCausalLM, AutoTokenizer
 from llava_gpt_neox import LlavaGPTNeoXForCausalLM
 from PIL import Image
-device='cuda'
+device='cpu'
 
 llm = 'LearnItAnyway/llava-polyglot-ko-1.3b-hf'
 tokenizer = AutoTokenizer.from_pretrained(llm)
