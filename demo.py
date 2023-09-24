@@ -12,14 +12,14 @@ device='cpu'
 
 llm = 'LearnItAnyway/llava-polyglot-ko-1.3b-hf'
 tokenizer = AutoTokenizer.from_pretrained(llm)
-model = LlavaGPTNeoXForCausalLM.from_pretrained(llm).half().to(device)
+model = LlavaGPTNeoXForCausalLM.from_pretrained(llm).to(device)
 
 
 image_file = f"example.jpg"
 from transformers import CLIPImageProcessor
 image_processor = CLIPImageProcessor.from_pretrained('openai/clip-vit-large-patch14')
 image = Image.open(image_file).convert('RGB')
-image = image_processor(image, return_tensors='pt')['pixel_values'][0].half()
+image = image_processor(image, return_tensors='pt')['pixel_values'][0]
 model.gpt_neox.vision_tower.config.im_patch_token = tokenizer.encode("<im_patch>")[0]
 model.gpt_neox.vision_tower.config.use_im_start_end=False
 
